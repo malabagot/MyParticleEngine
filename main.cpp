@@ -2,18 +2,35 @@
 #include <string>
 #include <vector>
 
+struct Vec2 {double x; double y;};
+struct Particle {Vec2 position; Vec2 Velocity;};
+
+Vec2 operator+(Vec2 a, Vec2 b) {return {a.x + b.x, a.y + b.y};}
+Vec2 operator-(Vec2 a, Vec2 b) {return {a.x - b.x, a.y - b.y};}
+Vec2 operator*(Vec2 a, double b) {return {a.x * b, a.y * b};}
+Vec2 operator*(double a, Vec2 b) {return {b.x * a, b.y * a};}
+
+
 int main() {
-    struct Vec2 {double x; double y;};
-    Vec2 position{0.0, 0.0};
-    position.x = 5.0;
-    position.y = 10.0;
-    std::cout << position.x << ", " << position.y;
+    Particle particle1 {{0.0,0.0},{1.0,1.0}};
+    Particle particle2 {{0.0,0.0},{2.0,2.0}};
+    Particle particle3 {{0.0,0.0},{3.0,3.0}};
+    Particle particle4 {{0.0,0.0},{4.0,4.0}};
 
-    Vec2 velocity{1.0, 1.0};
+    Vec2 gravity{0.0, -9.81};
+    double dt = 0.1;
 
-    for (int i=0; i<10; i++){
-        position.x += velocity.x;
-        position.y += velocity.y;
+    std::vector<Particle> particle_list {particle1, particle2, particle3, particle4};
+
+    for (double i=0.0; i<9.999; i+=dt){
+        for (Particle &particle : particle_list){
+            particle.Velocity = particle.Velocity + gravity * dt;
+            particle.position = particle.position + particle.Velocity * dt;
+        }
     }
-    std::cout << "\n" << position.x << ", " << position.y;
+
+    for (Particle particle : particle_list){
+        std::cout << "Particle position: (" << particle.position.x << ", " << particle.position.y << ")\n";
+    }
+
 }
