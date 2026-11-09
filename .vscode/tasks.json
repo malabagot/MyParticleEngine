@@ -10,7 +10,11 @@
                 "-D_GLIBCXX_ASSERTIONS",
                 "${file}",
                 "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "-lraylib",
+                "-lopengl32",
+                "-lgdi32",
+                "-lwinmm"
             ],
             "options": {
                 "cwd": "${fileDirname}"
