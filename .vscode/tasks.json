@@ -14,7 +14,8 @@
                 "-lraylib",
                 "-lopengl32",
                 "-lgdi32",
-                "-lwinmm"
+                "-lwinmm",
+                "-O2"
             ],
             "options": {
                 "cwd": "${fileDirname}"
