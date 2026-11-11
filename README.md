@@ -1,6 +1,16 @@
 # This is my particle engine
 Made using C++, I'm using this as a deep dive into simulation.
 I aim to build on this further, eventually hoping to implement fluid simulation.
+Here are its current best features:
+ - Verlet Integration
+ - Stable Stacking
+ - Spatial Hashing
+ - .h + .cpp file structure
+ - fps checker
+ - Spawn balls by clicking
+ - Air resistance
+ - Inelastic Wall collisions
+
 
 ## Here is my first simulation, V1:
 ![Gif Not loaded](media/Animation.gif)
@@ -45,10 +55,18 @@ I aim to build on this further, eventually hoping to implement fluid simulation.
 - Spatial hashing added to only compute collisions between particles in 9 closest possible places (massive performance boost)
 
 # Thoughts
- - Spatial hashing especially useful for larger numbers of balls. Collision checks stay linear now (O(n) probably about 9n), whereas before they were exponential as every ball checked collisions with every other ball, but now its around 8 at most.
+ - Spatial hashing especially useful for larger numbers of balls. Collision checks stay linear now (O(n) probably about 9n), whereas before they were quadratic as every ball checked collisions with every other ball, but now its around 8 at most.
  - Spatial hashing was by far the hardest implementation; thinking about, and coding to find 9 closest locations within the spatial Grid was very complicated.
  - I expected its benefit to be larger. Especially the ball amount of 30 fps, considering that its benefit over naive collisions is larger for higher numbers of balls O(n^2) compared to O(n) with a chunky bit of overhead.
  - In all simulations so far, the max balls at 30 fps is usually about 3x that at 60fps. The largest being V3 at around 3.06x, the lowest being V2 at 2.23x. I infer this is from the processing complexity of doing spatial hashing over naive collisions.
  - Fps in v2 and v3 would be much higher, most likely 4x higher if it wasnt at the compromise of substeps, which makes physics more stable and realistic, but mean almost 4x the computation and spatial hashing, ball collisions and verlet integration are repeated 4x every frame.
  - My favourite part of this so far has been observing the visual difference of using smarter logic like verlet over euler and spatial hashing. 
  - The most satisfying part was when i identified this problem: Fast particles hitting a bed of other particles would trampoline back up, with almost all momentum conserved, whereas slow particles settled realistically. I realised this must be because the faster balls travel so quick that they travel very far into the pile in a single frame because of their velocity, and since rebound is proportional to ball overlap, it caused the balls to bounce back further than they should. This is how i learnt about the benefit of substepping.
+
+# What I want to add next
+ - I could effectively halve processing time for ball collisions. if ball A checks collisions with ball B, ball B also checks collisions with ball A, when it doesnt need to because only 1 needs to be computed for both bounces to occur
+ - I add a benchmarking tool that automatically adds 1k, 2.5k, 5k and 10k balls for easy benchmarking that also keeps substeps consistent.
+ - Big visual changes like friction between balls, ropes, fabric, dynamic gravity and more other optimisation if possible.
+ - Make this runnable on other devices that arent on windows x86 like me, apparently Cmake is a good way to do so.
+ - Variable clean up to make sure all calculations are done the minimum amount of times possible
+
