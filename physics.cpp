@@ -58,3 +58,11 @@ void particleWallCollisions(std::vector<Particle>&particle_list) {
             }
         }
 }
+
+void bruteForceBallCollisions(std::vector<Particle>&particle_list) { // naive version: checks every pair of balls, only used when useSpatialHashing is false
+    for (int i=0; i<particle_list.size()-1; i++){
+        for (int j=i+1; j<particle_list.size(); j++){
+            particleBallCollisions(particle_list, i, j);
+        }
+    }
+}
