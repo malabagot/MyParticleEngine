@@ -32,8 +32,8 @@ void reconstructSpatialGrid (spatialGrid&screenGrid, std::vector<Particle>&parti
     };*/
 
     for (int i=0; i < particle_list.size(); i++){
-        int row = std::floor(particle_list[i].currentPosition.x/ballDiameter);
-        int column = std::floor(particle_list[i].currentPosition.y/ballDiameter);
+        int column  = std::floor(particle_list[i].currentPosition.x/ballDiameter);
+        int row = std::floor(particle_list[i].currentPosition.y/ballDiameter);
         // keep the cell inside the grid so particles on the edge don't crash
         if (row < 0) row = 0;
         if (row >= screenGrid.totalRows) row = screenGrid.totalRows - 1;
