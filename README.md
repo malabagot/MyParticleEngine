@@ -1,12 +1,9 @@
 # This is my particle engine
-Made using C++, I'm using this as a deep dive into simulation.
-I aim to build on this further, eventually hoping to implement fluid simulation.
+Made using C++. Spatial hashing used to improve performance by 49x. Substepping used for improved physics. Fabrics and Fluid soon to be added.
 Here are its current best features:
  - Verlet Integration
  - Stable Stacking
  - Spatial Hashing
- - .h + .cpp file structure
- - fps checker
  - Spawn balls by clicking
  - Air resistance
  - Inelastic Wall collisions
