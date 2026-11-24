@@ -49,7 +49,18 @@ Here are its current best features:
 ### Details
 - Same as v1
 - ball collision overhauled to work on only 2 particles rather than all
-- Spatial hashing added to only compute collisions between particles in 9 closest possible places (massive performance boost)
+- Spatial hashing added to only compute collisions between particles in 9 closest possible places (massive performance boost)#
+
+## Here is V4:
+![Gif Not loaded](media/Animation5.gif)
+
+### Performance with -02
+- 60 fps at 3800 balls
+- 30 fps at 8450 balls
+ 
+### Details
+- spatial hashing grid overhauled to use cache friendly ordered particle list and cumulative cell list rather than nested vector array
+- custom vector operations made inline in header instead of h to stop main.cpp calling vec2.h
 
 ## Benchmarks
 
