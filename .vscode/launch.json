@@ -9,7 +9,8 @@
       "stopAtEntry": false,
       "externalConsole": true,
       "cwd": "c:/MyParticleEngine",
-      "program": "c:/MyParticleEngine/build/Debug/outDebug",
+      "program": "c:/MyParticleEngine/build/app.exe",
+      "preLaunchTask": "CMake: build",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

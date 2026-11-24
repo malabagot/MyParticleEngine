@@ -10,6 +10,7 @@
       "cStandard": "${default}",
       "cppStandard": "${default}",
       "intelliSenseMode": "windows-gcc-x64",
+      "compileCommands": "${workspaceFolder}/build/compile_commands.json",
       "compilerArgs": [
         ""
       ]

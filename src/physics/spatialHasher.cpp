@@ -27,7 +27,7 @@ void reconstructSpatialGrid (spatialGrid&screenGrid, std::vector<Particle>&parti
     std::vector<int> tempList {};
     tempList.resize(screenGrid.totalColumns*screenGrid.totalRows); //temporary non-cumulative list to count number of balls in each cell.
 
-    for (int i=0; i < particle_list.size(); i++){ //for every particle
+    for (int i=0; i < static_cast<int>(particle_list.size()); i++){ //for every particle
         int column  = std::floor(particle_list[i].currentPosition.x/ballDiameter); //calculate the cell row and column they are in
         int row = std::floor(particle_list[i].currentPosition.y/ballDiameter);
         
@@ -47,7 +47,7 @@ void reconstructSpatialGrid (spatialGrid&screenGrid, std::vector<Particle>&parti
         //turning tempList into the cumulative list
         screenGrid.cumulativeCellList.resize(tempList.size() + 1); // +1 for the extra end entry
         int counter = 0;
-        for (int i=0;i < tempList.size();i++){ //for every cell in the temp list
+        for (int i=0;i < static_cast<int>(tempList.size());i++){ //for every cell in the temp list
             screenGrid.cumulativeCellList[i] = counter; // where this cell starts
             counter = counter + tempList[i];
             };
@@ -63,7 +63,7 @@ void reconstructSpatialGrid (spatialGrid&screenGrid, std::vector<Particle>&parti
         std::vector<int> nextFreeSlot {};
         nextFreeSlot.resize(tempList.size()); // as we fill the sorted list, we must be able to see how many of the particles have been added to the cell already
 
-        for (int i=0; i < particle_list.size();i++){ //for all particles
+        for (int i=0; i < static_cast<int>(particle_list.size());i++){ //for all particles
             int cell = particle_list[i].currentRow*screenGrid.totalColumns + particle_list[i].currentColumn; //calculate that particles cell index
             temporary_particle_list[screenGrid.cumulativeCellList[cell] + nextFreeSlot[cell]] = particle_list[i]; // put the particle in the next free slot of its cell
             nextFreeSlot[cell] ++;
@@ -93,7 +93,7 @@ void compute9ClosestCellsBalls(std::vector<Particle>&particle_list, spatialGrid&
 */
 
 void compute9ClosestCellsBalls(std::vector<Particle>&particle_list, spatialGrid&screenGrid){ //checks for all balls if there are balls in the closest 9 grid cells and calls particleBallCollisions if there is
-    for (int mainParticleIndex = 0; mainParticleIndex < particle_list.size(); mainParticleIndex++){ //for every particle
+    for (int mainParticleIndex = 0; mainParticleIndex < static_cast<int>(particle_list.size()); mainParticleIndex++){ //for every particle
         Particle&particle = particle_list[mainParticleIndex];
 
         for(int rowOffset=-1; rowOffset < 2; rowOffset++){ // this combined with next line checks all 9 closest cells

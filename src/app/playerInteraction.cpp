@@ -14,7 +14,7 @@ void particleSpawnOnClick(std::vector<Particle>& particle_list) {
                         (double)GetMouseX()/worldToScreenScale,
                         (double)(worldHeight*worldToScreenScale - GetMouseY())/worldToScreenScale
                     },
-                    {0.0, -9.81
+                    {0.0, -30//-9.81
                     },
                     0, // currentRow and currentColumn get set properly by reconstructSpatialGrid every substep
                     0

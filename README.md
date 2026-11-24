@@ -8,6 +8,24 @@ Here are its current best features:
  - Air resistance
  - Inelastic Wall collisions
 
+## Building
+Needs CMake 3.20+, a C++20 compiler and git (raylib is downloaded automatically on first configure).
+
+```
+cmake -S . -B build
+cmake --build build
+```
+
+The executable is `build/app` (`build/app.exe` on Windows). With no build type given, single-config generators (Ninja, Makefiles) default to Release.
+
+Multi-config generators (Visual Studio, Xcode) choose the build type at build time, so add `--config Release`, otherwise you get a slow Debug build:
+
+```
+cmake --build build --config Release
+```
+
+To also build the (currently empty) tests, configure with `-DBUILD_TESTS=ON`, then run `ctest --test-dir build -C Release`. The `bench` target is built by default.
+
 
 ## Here is my first simulation, V1:
 ![Gif Not loaded](media/Animation.gif)
