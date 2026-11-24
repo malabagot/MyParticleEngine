@@ -25,11 +25,10 @@ int main() { /*responsible for creating particle_list and bringing all functions
     /*actual loop that runs once per frame*/
     while (!WindowShouldClose()){
         for (int substepCounter=0; substepCounter < numberOfSubsteps; substepCounter++){
-            verletIntegrationMover(particle_list, dt/numberOfSubsteps);
-            clearSpatialGrid(screenGrid);
-            reconstructSpatialGrid(screenGrid, particle_list);
-            compute9ClosestCellsBalls(particle_list, screenGrid);
-            particleWallCollisions(particle_list);
+            verletIntegrationMover(particle_list, dt/numberOfSubsteps); // Moves particles based on velocity and acceleration
+            reconstructSpatialGrid(screenGrid, particle_list); // recreates the cumulativeCellList and sorts particle_list by cell
+            compute9ClosestCellsBalls(particle_list, screenGrid); // calculates the collisions of adjacent particles using cumulative cell list
+            particleWallCollisions(particle_list); // calculates collitions between any ball and the wall, its after ball-ball to stop currentPosition being moved out of screen
         }
         particleSpawnOnClick(particle_list);
         drawScreen(particle_list);
