@@ -49,7 +49,18 @@ Here are its current best features:
 ### Details
 - Same as v1
 - ball collision overhauled to work on only 2 particles rather than all
-- Spatial hashing added to only compute collisions between particles in 9 closest possible places (massive performance boost)
+- Spatial hashing added to only compute collisions between particles in 9 closest possible places (massive performance boost)#
+
+## Here is V4:
+![Gif Not loaded](media/Animation5.gif)
+
+### Performance with -02
+- 60 fps at 3800 balls
+- 30 fps at 8450 balls
+ 
+### Details
+- spatial hashing grid overhauled to use cache friendly ordered particle list and cumulative cell list rather than nested vector array
+- custom vector operations made inline in header instead of h to stop main.cpp calling vec2.h
 
 ## Benchmarks
 
@@ -116,8 +127,11 @@ Brute force scales roughly as O(n²), which I predicted: 2.5× more balls cost 5
  - The most satisfying part was when i identified this problem: Fast particles hitting a bed of other particles would trampoline back up, with almost all momentum conserved, whereas slow particles settled realistically. I realised this must be because the faster balls travel so quick that they travel very far into the pile in a single frame because of their velocity, and since rebound is proportional to ball overlap, it caused the balls to bounce back further than they should. This is how i learnt about the benefit of substepping.
 
 # What I want to add next
+ - finish multithreading to make better use of CPU
  - I could effectively halve processing time for ball collisions. if ball A checks collisions with ball B, ball B also checks collisions with ball A, when it doesnt need to because only 1 needs to be computed for both bounces to occur
- - For spatial hashing i could clear only the cells used this step, instead of every cell instead of every cell to reduce the overhead.
+ - Make wall collisions also use spatial hashing
  - Big visual changes like friction between balls, ropes, fabric, dynamic gravity and more other optimisation if possible.
  - Make this runnable on other devices that arent on windows x86 like me, apparently Cmake is a good way to do so.
- - Variable clean up to make sure all calculations are done the minimum amount of times possible
+ - Unit testing to make sure im not compromising on function as i increase performance
+ - Run collisions on GPU to make things way faster with bulk calculations
+

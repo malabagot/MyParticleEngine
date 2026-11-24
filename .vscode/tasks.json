@@ -6,8 +6,6 @@
             "command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
             "args": [
                 "-fdiagnostics-color=always",
-                "-g",
-                "-D_GLIBCXX_ASSERTIONS",
                 "${workspaceFolder}\\*.cpp",
                 "-o",
                 "${workspaceFolder}\\main.exe",
