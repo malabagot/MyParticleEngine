@@ -1,5 +1,5 @@
 # This is my particle engine
-Made using C++. Spatial hashing used to improve performance by 49x. Substepping used for improved physics. Fabrics and Fluid soon to be added.
+Made using C++. Spatial hashing used to improve performance by 119x at 10,000 particles. Substepping used for improved physics. Fabrics and Fluid soon to be added.
 Here are its current best features:
  - Verlet Integration
  - Stable Stacking
@@ -7,6 +7,11 @@ Here are its current best features:
  - Spawn balls by clicking
  - Air resistance
  - Inelastic Wall collisions
+ - Cache-friendly layout
+
+# Quick Summary of progress
+First version provided brute force + normal position and velocity calculation all in 1 file; it did 300ms per frame for 5000 balls.
+Current version uses verlet integration, spatial hashing with flat grid, substepping, cache friendly layout, CMake set up, benchmarking variant; it does 1.3ms per frame for 5000 balls. 
 
 ## Building
 Needs CMake 3.20+, a C++20 compiler and git (raylib is downloaded automatically on first configure).

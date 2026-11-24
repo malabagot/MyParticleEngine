@@ -12,3 +12,5 @@ extern double dampingCoefficient;
 extern int numberOfSubsteps;
 double WorldToScreenX(double x);
 double WorldToScreenY(double y);
+
+extern bool useSpatialHashing; // true = spatial hashing, false = brute force (for benchmarking)
